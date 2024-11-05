@@ -1,12 +1,10 @@
-import './App.css'
+import { router } from "./router/createRouteConfig";
+import { useRoutes } from "react-router-dom";
+import './style/index.css';
 
-function App() {
+const App = function () {
+  const elements = useRoutes(router);
+  return elements;
+};
 
-  return (
-    <>
-      <div>我是app</div>
-    </>
-  )
-}
-
-export default App
+export default App;
