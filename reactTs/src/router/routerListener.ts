@@ -17,7 +17,7 @@ const routerListener = (next: NavigateFunction, to: Location, from?: Location) =
     // 数据获取与加载控制
     // 导航控制埋点
     // ......
-    next(to);
+    // next(to);
 
 }
 
