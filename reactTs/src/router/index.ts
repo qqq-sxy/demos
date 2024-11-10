@@ -1,6 +1,6 @@
 import { ComponentType, lazy } from "react";
 import { RouteObject } from "react-router-dom";
-
+import NotFound from "../page/notFound/index";
 // 使用交叉类型扩展 RouteObject
 export type IRoute = RouteObject & {
     /**
@@ -37,6 +37,12 @@ const routeConfig: IRouteConfig = {
             path: "/other",
             component: lazy(() => import("../page/other")),
         },
+        {
+            name: '404',
+            path: "/*",
+            component: NotFound,
+            isMenu: false
+        }
 
     ]
 }

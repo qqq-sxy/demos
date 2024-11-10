@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import { RouteObject } from "react-router-dom";
 import routeConfig, { IRoute } from ".";
 import Guard from "./Guard";
+import ErrorRouterCom from "./errorRouterCom";
 
 /**
  * 将简单路由配置转化为 react-router-dom 所需要的配置
@@ -30,6 +31,7 @@ function createRouteConfig(routeList: IRoute[]): RouteObject[] {
        * 支持覆盖原属性
        */
       ...item,
+      errorElement: <ErrorRouterCom />,
       children: item.children && createRouteConfig(item.children),
     };
   });
