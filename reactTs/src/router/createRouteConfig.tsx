@@ -27,11 +27,11 @@ function createRouteConfig(routeList: IRoute[]): RouteObject[] {
           <Com />
         </Suspense>
       ),
+      errorElement: ErrorRouterCom,
       /**
        * 支持覆盖原属性
        */
       ...item,
-      errorElement: <ErrorRouterCom />,
       children: item.children && createRouteConfig(item.children),
     };
   });
