@@ -33,6 +33,11 @@ const routeConfig: IRouteConfig = {
             component: lazy(() => import("../page/home")),
         },
         {
+            name: 'demos',
+            path:  "/demos",
+            component: lazy(() => import("../page/demos")),
+        },
+        {
             name: 'other',
             path: "/other",
             component: lazy(() => import("../page/other")),
