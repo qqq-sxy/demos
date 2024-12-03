@@ -1,8 +1,10 @@
+import Demo1 from "./demo1";
+
 const Demos = () => {
   return (
     <div>
-      <h2>Demos</h2>
-      <p>Some demos will be here</p>
+      <h1>Demo1</h1>
+      <Demo1 />
     </div>
   );
 };
