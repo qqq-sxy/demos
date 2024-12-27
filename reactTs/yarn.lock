@@ -1507,6 +1507,11 @@ shebang-regex@^3.0.0:
   resolved "https://packages.aliyun.com/61e54b0e0bb300d827e1ae27/npm/npm-registry/shebang-regex/-/shebang-regex-3.0.0.tgz#ae16f1644d873ecad843b0307b143362d4c42172"
   integrity sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==
 
+signature_pad@^5.0.4:
+  version "5.0.4"
+  resolved "https://packages.aliyun.com/61e54b0e0bb300d827e1ae27/npm/npm-registry/signature_pad/-/signature_pad-5.0.4.tgz#81d15a75eb6c86a73c4f33b1cdec29068f057c64"
+  integrity sha512-nngOixbwLAUOuH3QnZwlgwmynQblxmo4iWacKFwfymJfiY+Qt+9icNtcIe/okqXKun4hJ5QTFmHyC7dmv6lf2w==
+
 source-map-js@^1.2.1:
   version "1.2.1"
   resolved "https://packages.aliyun.com/61e54b0e0bb300d827e1ae27/npm/npm-registry/source-map-js/-/source-map-js-1.2.1.tgz#1ce5650fddd87abc099eda37dcff024c2667ae46"
