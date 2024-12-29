@@ -33,23 +33,51 @@ const Sketchpad = (props: sketchpadProps, ref: any) => {
     if (canvas) {
       sketchPadRef.current = new SignaturePad(canvas, {
         ...initSignaturePadConfig,
+        ...config,
       });
+    }
+    if(disabled) {
+      sketchPadRef.current?.off();
     }
   }, []);
 
+    // 处理高 DPI 屏幕
+    const resizeCanvas = () => {
+      const canvas = document.getElementById(
+        "sketchpad-canvas"
+      ) as HTMLCanvasElement;
+      if (!canvas) return;
+      const ratio =  Math.max(window.devicePixelRatio || 1, 1);
+      canvas.width = canvas.offsetWidth * ratio;
+      canvas.height = canvas.offsetHeight * ratio;
+      canvas.getContext("2d").scale(ratio, ratio);
+      sketchPadRef.current?.clear(); 
+  }
+    useEffect(() => {
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+      return () => {
+        window.removeEventListener("resize", resizeCanvas);
+      };
+    }, []);
+
   // 获取绘制数据
   const toDataURL = () => {
-
+    if (!sketchPadRef.current?.isEmpty()) {
+      const base64Data = sketchPadRef.current?.toDataURL() || "";
+      return base64Data;
+    }
+    return "";
   };
 
   // 根据数据绘制画板
   const fromDataURL = (dataUrl: string) => {
-    console.log('dataUrl: ', dataUrl);
+    sketchPadRef.current?.fromDataURL(dataUrl);
   };
 
   // 清除签名
   const clear = () => {
-
+    sketchPadRef.current?.clear();
   };
 
   // 向外暴露方法
