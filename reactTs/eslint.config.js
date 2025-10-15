@@ -7,6 +7,7 @@ import tseslint from 'typescript-eslint';
 import prettierPlugin from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
 import reactPlugin from 'eslint-plugin-react';
+import tseslintParser from "@typescript-eslint/parser";
 
 // 导出 ESLint 配置
 export default [
@@ -23,7 +24,7 @@ export default [
       },
       
       // 解析器：使用 TypeScript 解析器
-      // parser: tseslintParser,
+      parser: tseslintParser,
     }
   },
   
@@ -51,7 +52,6 @@ export default [
     
     // 启用的插件 - 使用对象格式
     plugins: {
-      // '@typescript-eslint': tseslintPlugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
       'prettier': prettierPlugin,
