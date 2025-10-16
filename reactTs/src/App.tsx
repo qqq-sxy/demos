@@ -2,7 +2,7 @@ import { router } from "./router/createRouteConfig";
 import { useNavigate, useRoutes } from "react-router-dom";
 import useLocationChange from "./router/useLocationChange";
 import routerListener from "./router/routerListener";
-import './style/index.css';
+import "./style/index.css";
 import { useEffect } from "react";
 
 const App = function () {
@@ -17,7 +17,7 @@ const App = function () {
     window.$wujie?.bus.$on("routeChange", routeChangeHandler);
     return () => {
       window.$wujie?.bus.$off("routeChange", routeChangeHandler);
-    }
+    };
   }, [navigate]);
 
   useLocationChange((to, from) => {

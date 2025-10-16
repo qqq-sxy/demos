@@ -1,6 +1,6 @@
 import { useEffect, forwardRef, useImperativeHandle, useRef } from "react";
 import SignaturePad from "signature_pad";
-import './index.less';
+import "./index.less";
 
 interface sketchpadProps {
   width?: number; // 画布宽度
@@ -21,14 +21,19 @@ const initSignaturePadConfig = {
 };
 
 const Sketchpad = (props: sketchpadProps, ref: any) => {
-  const { width = 100, height = 100, disabled = false, config = {} } = props || {};
+  const {
+    width = 100,
+    height = 100,
+    disabled = false,
+    config = {},
+  } = props || {};
 
   const sketchPadRef = useRef<SignaturePad | null>(null);
 
   // 初始化
   useEffect(() => {
     const canvas = document.getElementById(
-      "sketchpad-canvas"
+      "sketchpad-canvas",
     ) as HTMLCanvasElement;
     if (canvas) {
       sketchPadRef.current = new SignaturePad(canvas, {
@@ -36,30 +41,30 @@ const Sketchpad = (props: sketchpadProps, ref: any) => {
         ...config,
       });
     }
-    if(disabled) {
+    if (disabled) {
       sketchPadRef.current?.off();
     }
   }, []);
 
-    // 处理高 DPI 屏幕
-    const resizeCanvas = () => {
-      const canvas = document.getElementById(
-        "sketchpad-canvas"
-      ) as HTMLCanvasElement;
-      if (!canvas) return;
-      const ratio =  Math.max(window.devicePixelRatio || 1, 1);
-      canvas.width = canvas.offsetWidth * ratio;
-      canvas.height = canvas.offsetHeight * ratio;
-      canvas.getContext("2d").scale(ratio, ratio);
-      sketchPadRef.current?.clear(); 
-  }
-    useEffect(() => {
-      window.addEventListener("resize", resizeCanvas);
-      resizeCanvas();
-      return () => {
-        window.removeEventListener("resize", resizeCanvas);
-      };
-    }, []);
+  // 处理高 DPI 屏幕
+  const resizeCanvas = () => {
+    const canvas = document.getElementById(
+      "sketchpad-canvas",
+    ) as HTMLCanvasElement;
+    if (!canvas) return;
+    const ratio = Math.max(window.devicePixelRatio || 1, 1);
+    canvas.width = canvas.offsetWidth * ratio;
+    canvas.height = canvas.offsetHeight * ratio;
+    canvas.getContext("2d").scale(ratio, ratio);
+    sketchPadRef.current?.clear();
+  };
+  useEffect(() => {
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    return () => {
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, []);
 
   // 获取绘制数据
   const toDataURL = () => {
@@ -81,19 +86,30 @@ const Sketchpad = (props: sketchpadProps, ref: any) => {
   };
 
   // 向外暴露方法
-  useImperativeHandle(ref, () => ({
-    toDataURL,
-    fromDataURL,
-    clear
-  }), []);
+  useImperativeHandle(
+    ref,
+    () => ({
+      toDataURL,
+      fromDataURL,
+      clear,
+    }),
+    [],
+  );
 
-  return <div className="sketchpad">
-    <canvas 
-      id="sketchpad-canvas"
-      className={`sketchpad-canvas sketchpad-canvas--custom`}
-      style={{ "--canvas-width": `${width}px`, "--canvas-height": `${height}px`} as React.CSSProperties}
-    />
-  </div>
-}
+  return (
+    <div className="sketchpad">
+      <canvas
+        id="sketchpad-canvas"
+        className={`sketchpad-canvas sketchpad-canvas--custom`}
+        style={
+          {
+            "--canvas-width": `${width}px`,
+            "--canvas-height": `${height}px`,
+          } as React.CSSProperties
+        }
+      />
+    </div>
+  );
+};
 
 export default forwardRef(Sketchpad);

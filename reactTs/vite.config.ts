@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import { viteMockServe } from "vite-plugin-mock";
 
 // https://vite.dev/config/
@@ -11,6 +11,6 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 1074
-  }
-})
+    port: 1074,
+  },
+});

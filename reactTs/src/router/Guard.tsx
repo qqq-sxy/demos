@@ -1,9 +1,8 @@
-
 import React, { useEffect, useState } from "react";
 
 /**
  * 守卫逻辑
- * @returns 
+ * @returns
  */
 const guardAction = () => {
   // 1s后再显示组件
@@ -28,11 +27,13 @@ interface IGuardCom {
 const GuardCom = (props: IGuardCom) => {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    guardAction().then(() => {
-      console.log('resolve')
-    }).finally(() => {
-      setVisible(true);
-    });
+    guardAction()
+      .then(() => {
+        console.log("resolve");
+      })
+      .finally(() => {
+        setVisible(true);
+      });
   }, []);
 
   return visible ? props.children : <></>;

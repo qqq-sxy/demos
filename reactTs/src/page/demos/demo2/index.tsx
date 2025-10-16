@@ -15,7 +15,6 @@ export default Demo2;
 
 /** 子组件 */
 const Com1 = () => {
-
   const [nn2, setNn2] = useState({ n: 1 });
   const handleClick2 = () => {
     setNn2({ n: 1 });

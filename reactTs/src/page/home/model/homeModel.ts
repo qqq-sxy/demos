@@ -1,8 +1,6 @@
-import { createModel } from '@rematch/core';
-import { RootModel } from '../../../model/models';
-import { getUserInfo } from '../../../service';
-
-
+import { createModel } from "@rematch/core";
+import { RootModel } from "../../../model/models";
+import { getUserInfo } from "../../../service";
 
 interface IhomeModelState {
   useInfo: any;
@@ -10,13 +8,13 @@ interface IhomeModelState {
 
 export const home = createModel<RootModel>()({
   state: {
-    useInfo: {}
+    useInfo: {},
   } as IhomeModelState, // initial state
   reducers: {
     setUseInfo(state, payload: any = {}) {
       return {
         ...state,
-        useInfo: payload
+        useInfo: payload,
       };
     },
   },
