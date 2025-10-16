@@ -8,6 +8,9 @@ const Home = () => {
   const dispatch = useDispatch<Dispatch>();
   const useInfo = useSelector((state: RootModel) => state.home.useInfo);  
 
+  const name = "foo"
+  function add(a:number,b:number){return a+b} 
+
   useEffect(() => {
     // getUserInfo().then((res) => {
     //   dispatch.home.setUseInfo(res);
