@@ -5,6 +5,7 @@ import { getUserInfo } from '../../../service';
 
 
 interface IhomeModelState {
+  useInfo: any;
 }
 
 export const home = createModel<RootModel>()({
