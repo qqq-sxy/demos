@@ -17,7 +17,7 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   (config) => {
-    const token = ""; // 自定义获取token
+    const token = localStorage.getItem("token"); // 自定义获取token
     if (config?.headers && token) {
       config.headers["Authorization"] = token || "";
     }
@@ -26,7 +26,7 @@ request.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 // 响应拦截器
@@ -36,7 +36,7 @@ request.interceptors.response.use(
   },
   (error) => {
     return Promise.reject(error);
-  },
+  }
 );
 
 // 定义一个枚举code
@@ -72,7 +72,7 @@ const http = async (config: IAxiosParam): Promise<any> => {
       switch (res.code) {
         case ResCode.notLogin:
           // 未登录
-          // window.location.href = '/login';
+          window.location.href = "/login";
           break;
         case ResCode.notPower:
           // 无权限

@@ -49,6 +49,11 @@ const routeConfig: IRouteConfig = {
       isMenu: false,
     },
     {
+      name: "login",
+      path: "/login",
+      component: lazy(() => import("../page/login")),
+    },
+    {
       name: "wujieDemo1",
       path: "/wujieDemo1",
       component: lazy(() => import("../page/wujiePage/wujieDemo1/index")),

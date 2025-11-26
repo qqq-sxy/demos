@@ -1,53 +1,38 @@
 <template>
-  <!--保活模式，name相同则复用一个子应用实例，改变url无效，必须采用通信的方式告知路由变化 -->
-  <WujieVue
-    width="100%"
-    height="100%"
-    name="reactDemo"
-    :url="vue3Url"
-    :sync="true"
-    :plugins="[InstanceofPlugin()]"
-    alive
-  ></WujieVue>
+  <div class="main-app">
+    <h1>Vue3 主应用</h1>
+    <!-- 嵌入 React 子应用 -->
+    <WujieVue width="100%" height="600px" :url="subAppUrl" :name="subAppName" :props="subAppProps"
+      @onLoad="handleSubAppLoad" @onError="handleSubAppError" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from "vue";
-import WujieVue from "wujie-vue3";
-import { InstanceofPlugin } from "wujie-polyfill";
-import { useRoute, useRouter } from "vue-router";
+import { ref } from 'vue';
 
-const { bus } = WujieVue;
+// 子应用配置（React 子应用的运行地址，后续启动子应用后会用到）
+const subAppName = ref('react-sub-app'); // 子应用唯一标识（必须唯一）
+const subAppUrl = ref('http://localhost:3001'); // 子应用端口（后续配置 React 子应用为 3001）
 
-const domainMap = {
-  dev: "http://localhost:1074",
-  test: "http://localhost:1074",
-  prod: "http://localhost:1074",
+// 主应用向子应用传递的 props（可选）
+const subAppProps = ref({
+  mainAppName: 'Vue3 主应用',
+  token: 'main-app-token-123',
+});
+
+// 子应用加载成功回调
+const handleSubAppLoad = () => {
+  console.log('React 子应用加载成功');
 };
 
-const router = useRouter();
-const route = useRoute();
-
-const vue3Url = ref(domainMap["dev"] + "#/" + route.meta.subAppPath);
-
-// bus.$on("routerChange", (query: string) => {
-//   const pathParam = JSON.parse(query);
-//   router.push(pathParam);
-// });
-
-watch(
-  () => route.meta.subAppPath,
-  (newVal, oldVal) => {
-    if (newVal === undefined) return;
-    bus.$emit("routeChange", newVal);
-  },
-  {
-    immediate: true,
-  }
-);
-
-// 子应用登录失效时，通知主应用跳转登录页
-bus.$on("loginInvalid", () => {
-  alert("主应用执行登录失效逻辑");
-});
+// 子应用加载失败回调
+const handleSubAppError = (err: Error) => {
+  console.error('React 子应用加载失败：', err);
+};
 </script>
+
+<style scoped>
+.main-app {
+  padding: 20px;
+}
+</style>

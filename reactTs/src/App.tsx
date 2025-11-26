@@ -5,20 +5,26 @@ import routerListener from "./router/routerListener";
 import "./style/index.css";
 import { useEffect } from "react";
 
-const App = function () {
+const App = function (props: any) {
   const elements = useRoutes(router);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const wujieBus = window.__WUJIE_BUS;
     const routeChangeHandler = (path: string) => {
+      console.log("path", path);
       if (path === undefined) return;
       navigate("/" + path);
     };
-    window.$wujie?.bus.$on("routeChange", routeChangeHandler);
+    wujieBus.$emit('routeChange', {
+      type: 'reply',
+      content: '子应用已收到消息',
+    });
+    wujieBus.$on("routeChange", routeChangeHandler);
     return () => {
-      window.$wujie?.bus.$off("routeChange", routeChangeHandler);
+      wujieBus.$off("routeChange", routeChangeHandler);
     };
-  }, [navigate]);
+  }, []);
 
   useLocationChange((to, from) => {
     routerListener(navigate, to, from);

@@ -8,6 +8,12 @@ export const routes: Array<RouteRecordRaw> = [
     name: "Home",
     component: () => import("../pages/home/index.vue"),
   },
+  // 菜单页
+  {
+    path: "/menu",
+    name: "Menu",
+    component: () => import("../pages/menu/index.vue"),
+  },
   ...wujieRouter
 ]
 
