@@ -7,33 +7,24 @@
       </div>
       <el-menu :default-active="activeMenu" class="el-menu-vertical-demo" router @select="handleMenuSelect"
         background-color="#fff" text-color="#333" active-text-color="#409EFF">
-        <!-- 遍历路由生成菜单 -->
-        <!-- 一级菜单（无children） -->
-        <!-- <el-menu-item v-for="route in routes" :key="route.path" :index="route.path">
-          <el-icon v-if="route.meta.icon && iconMap[route.meta.icon]" style="margin-right: 8px;">
-            <component :is="iconMap[route.meta.icon as keyof typeof iconMap]" />
-          </el-icon>
-          <span>{{ route.meta.title || route.name }} {{ route.meta.level === 0 ? '一级菜单' : '二级菜单' }}</span>
-        </el-menu-item> -->
-
-        <!-- 二级菜单（有children） -->
-        <el-sub-menu v-for="route in routes" :key="route.path" :index="route.path" v-if="route.meta.level === 0">
-          <template #title>
-            <el-icon v-if="route.meta.icon && iconMap[route.meta.icon]" style="margin-right: 8px;">
-              <component :is="iconMap[route.meta.icon as keyof typeof iconMap]" />
-            </el-icon>
-            <span>{{ route.meta.title || route.name }} {{ route.meta.level === 0 ? '一级菜单' : '二级菜单' }}</span>
-          </template>
-
-          <!-- 二级菜单子项 -->
-          <!-- <el-menu-item v-for="child in route.children" :key="child.path" :index="`${route.path}/${child.path}`"
-            v-if="!child.meta.hidden">
-            <el-icon v-if="child.meta.icon && iconMap[child.meta.icon]" style="margin-right: 8px;">
-              <component :is="iconMap[child.meta.icon as keyof typeof iconMap]" />
-            </el-icon>
-            <span>{{ child.meta.title || child.name }}</span>
-          </el-menu-item> -->
-        </el-sub-menu>
+        <template v-for="route in routes" :key="route.path">
+          <el-sub-menu :index="route.path" v-if="route.meta.level === 0">
+            <template #title>
+              <el-icon v-if="route.meta.icon && iconMap[route.meta.icon]" style="margin-right: 8px;">
+                <component :is="iconMap[route.meta.icon as keyof typeof iconMap]" />
+              </el-icon>
+              <span>{{ route.meta.title || route.name }}</span>
+            </template>
+            <template v-for="childRoute in route.children || []" :key="childRoute.path">
+              <el-menu-item :index="childRoute.path">
+                <el-icon v-if="childRoute.meta.icon && iconMap[childRoute.meta.icon]" style="margin-right: 8px;">
+                  <component :is="iconMap[childRoute.meta.icon as keyof typeof iconMap]" />
+                </el-icon>
+                <span>{{ childRoute.meta.title || childRoute.name }}</span>
+              </el-menu-item>
+            </template>
+          </el-sub-menu>
+        </template>
       </el-menu>
     </el-aside>
 
@@ -97,7 +88,6 @@ const iconMap = {
 
 // 过滤后的路由列表（排除hidden的路由）
 const routes = computed(() => {
-  console.log("🚀 ~ router.getRoutes():", router.getRoutes())
 
   return router.getRoutes().filter(item => {
     // 排除特殊路由
