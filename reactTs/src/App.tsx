@@ -10,7 +10,7 @@ const App = function (props: any) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const wujieBus = window.__WUJIE_BUS;
+    const wujieBus = window.$wujie?.bus;
     const routeChangeHandler = (path: string) => {
       console.log("path", path);
       if (path === undefined) return;

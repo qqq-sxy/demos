@@ -21,6 +21,7 @@ const wujieRouters = [
           icon: 'Present', // 子菜单图标
           hidden: false,
           level: 1,
+          subAppPath: "/wujieDemo1",
         },
       },
       {
@@ -32,6 +33,7 @@ const wujieRouters = [
           icon: 'Present', // 子菜单图标
           hidden: false,
           level: 1,
+          subAppPath: "/wujieDemo2",
         },
       },
     ]
