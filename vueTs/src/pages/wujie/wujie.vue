@@ -33,7 +33,7 @@ const subAppProps = ref({
 const router = useRouter();
 /** 监听子应用的数据 */
 bus.$on("subAppData", (data: string) => {
-  console.log('data: ', data);
+  alert(data);
 });
 /** 监听子应用的数据 */
 
