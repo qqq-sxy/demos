@@ -7,17 +7,27 @@ export const routes: Array<RouteRecordRaw> = [
     path: "/",
     name: "Home",
     component: () => import("../pages/home/index.vue"),
-  },
-  // 菜单页
-  {
-    path: "/menu",
-    name: "Menu",
-    component: () => import("../pages/menu/index.vue"),
+    meta: {
+      title: '首页',
+      icon: 'HomeFilled',
+      hidden: false
+    }
   },
   ...wujieRouter
 ]
 
-export const router = createRouter({
+const router = createRouter({
   history: createWebHashHistory(),
   routes: routes,
 });
+
+// 路由守卫：修改页面标题
+router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = `${to.meta.title}`;
+  }
+  next();
+});
+
+export default router;
+
