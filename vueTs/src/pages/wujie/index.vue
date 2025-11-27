@@ -16,7 +16,7 @@
               <span>{{ route.meta.title || route.name }}</span>
             </template>
             <template v-for="childRoute in route.children || []" :key="childRoute.path">
-              <el-menu-item :index="childRoute.path">
+              <el-menu-item :index="route.path + '/' + childRoute.path">
                 <el-icon v-if="childRoute.meta.icon && iconMap[childRoute.meta.icon]" style="margin-right: 8px;">
                   <component :is="iconMap[childRoute.meta.icon as keyof typeof iconMap]" />
                 </el-icon>
