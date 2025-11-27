@@ -1,7 +1,7 @@
 const WujieDemo2 = () => {
   return (
     <div>
-      <h1>React 子应用 2</h1>
+      <h1>我是子应用(react)的wujieDemo2</h1>
     </div>
   );
 };

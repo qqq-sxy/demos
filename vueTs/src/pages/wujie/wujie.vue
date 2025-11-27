@@ -8,8 +8,6 @@
       :url="subAppUrl"
       :name="subAppName"
       :props="subAppProps"
-      @onLoad="handleSubAppLoad"
-      @onError="handleSubAppError"
     />
   </div>
 </template>
